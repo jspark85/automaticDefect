@@ -49,35 +49,36 @@ def getCenter(folder,atom):
     else:
         pos = 7
 
-    if atom == -1:
-        atom = atom + NIONS
+    if atom < 0:
+        atom = atom + NIONS + 1
     print('Position of the selected atom :',b[pos+atom])
     return b[pos+atom].split()
 
-def calcCharge(defect,neutral):
-    a = open(defect+'/OUTCAR')
+def calcCharge(charged,neutral):
+    a = open(charged+'/OUTCAR')
     b = a.readlines()
     a.close()
-    ND = 0
+    NC = 0
     i = 0
-    while ND == 0:
+    while NC == 0:
         if 'NELECT' in b[i]:
-            ND = float(b[i].split()[2])
+            NC = float(b[i].split()[2])
         else:
             i+=1
+    #############################################
     a = open(neutral+'/OUTCAR')
     b = a.readlines()
     a.close()
-    NP = 0
+    NN = 0
     i = 0
     while NP == 0:
         if 'NELECT' in b[i]:
             NP = float(b[i].split()[2])
         else:
             i+=1
-    print('NELECT of the neutral system: ',NP)
-    print('NELECT of the charged system: ',NP)
-    return int(ND-NP)
+    print('NELECT of the neutral system: ',NN)
+    print('NELECT of the charged system: ',NC)
+    return int(NC-NN)
 
 def returnPot(direction):
     print('Among 0, 1, and 2, you chose: ',direction)
@@ -96,12 +97,12 @@ def returnPot(direction):
         temp.append(t[2])
     return temp
 
-def execute(defect,neutral,bulk,center,direction):
+def execute(charged,neutral,bulk,center,direction):
     print('--------------')
-    charge = calcCharge(defect,neutral)
-    defect = locationLOCPOT(defect)
-    bulk = locationLOCPOT(bulk)
-    string = generateCommand(defect,bulk,center,charge,eps)
+    charge = calcCharge(charged,neutral)
+    locpotCharged = locationLOCPOT(charged)
+    locpotBulk = locationLOCPOT(bulk)
+    string = generateCommand(locpotCharged,locpotBulk,center,charge,eps)
     os.system(string)
 
     print('--------------')
@@ -113,11 +114,11 @@ def execute(defect,neutral,bulk,center,direction):
     os.system(string)
 
 ############################################################
-eps = '33.5'
-bulk = 'bulk'
+eps = '10' # material specific
+bulk = 'bulk' #bulk folder. 
 ############################################################
 center = map(float,getCenter(defect,-1))
-defect = '1'
+charged = '1' #
 neutral = '0'
 direction = 0
-execute(defect,neutral,bulk,center)
+execute(charged,neutral,bulk,center)
