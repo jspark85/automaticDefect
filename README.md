@@ -16,6 +16,6 @@ Input parameters:
 * direction = 0
 
 (4) Index of defect
-* center = map(float,getCenter(defect,"-1"))
+* center = map(float,getCenter(defect,**-1**))
 * -1 = last atom # 
 * integer i = ith atom
