@@ -8,9 +8,9 @@ Input parameters:
 * (e.g.) eps = '10' 
 
 (2) Location of folders
-* bulk = 'bulk' 
-* charged = '1' 
-* neutral = '0'
+* bulk (e.g) 'bulk' 
+* charged (e.g.) '1' 
+* neutral (e.g.) '0'
 
 (3) Direction (0, 1, or 2)
 * direction = 0
