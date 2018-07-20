@@ -1,4 +1,4 @@
-# automaticDefect
+# automaticDefectCorrection
 
 This code was written by Ji-Sang to run [sxdefectalign](https://sxrepo.mpie.de/projects/sphinx-add-ons/files) easily.
 
