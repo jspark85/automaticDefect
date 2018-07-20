@@ -5,8 +5,7 @@ This code was written by Ji-Sang to run [sxdefectalign](https://sxrepo.mpie.de/p
 Input parameters:
 
 * Dielectric constant
-
-(e.g.) eps = '10' 
+** (e.g.) eps = '10' 
 
 * Location of folders
 
